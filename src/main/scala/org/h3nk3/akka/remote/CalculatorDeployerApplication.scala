@@ -9,10 +9,13 @@ class CalculatorDeployerApplication extends Bootable {
   val system = ActorSystem("CalcDeplApp", ConfigFactory.load.getConfig("remoteconfig"))
   val actor = system.actorOf(Props[CalcDeployerAppActor], "calcAppActor")
 
-  system.actorOf(Props[SpecialCalcServiceActor], "calcServDepl")
-
+  val remoteActor = system.actorOf(Props[SpecialCalcServiceActor], "calcServDepl")
+  remoteActor ! Multiply(3, 3)
+   
+  val path = remoteActor.path.toString
+ 
   def perform(op: MathOp) = {
-    actor ! op
+    actor ! Tuple2(path, op)
   }
 
   def startup() {
@@ -26,9 +29,8 @@ class CalculatorDeployerApplication extends Bootable {
 
 class CalcDeployerAppActor extends Actor {
   def receive = {
-    case op: MathOp =>
-      context.system.actorFor("akka://CalculationService@127.0.0.1:2553/CalcDeplApp@127.0.0.1:2552/user/calcServDepl") ! op
-      //context.system.actorFor("akka://CalculatorService@127.0.0.1:2553/calcServDepl") ! op
+    case Tuple2(path: String, op: MathOp) =>
+      context.actorFor(path) ! op
     case result: MathResult => result match {
       case MultiplicationResult(n1, n2, r) => println("Mul result: %d * %d = %d".format(n1, n2, r))
       case DivisionResult(n1, n2, r) => println("Div result: %d / %d = %d".format(n1, n2, r))

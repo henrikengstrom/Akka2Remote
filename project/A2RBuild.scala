@@ -33,7 +33,7 @@ object Dependencies {
 
 object Dependency {
   object V {
-    val Akka      = "2.0-M1"
+    val Akka      = "2.0-SNAPSHOT"
   }
 
   val akkaKernel        = "com.typesafe.akka" % "akka-kernel"        % V.Akka
