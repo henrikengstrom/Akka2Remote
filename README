@@ -1,4 +1,4 @@
-*AKKA 2.0-M1 REMOTING EXAMPLE*
+h1. AKKA 2.0-M1 REMOTING EXAMPLE
 
 Example application for how to use Akka 2.0-M1 remoting.
 
@@ -24,7 +24,7 @@ To run this example you have to have SBT installed. Once this is fulfilled you j
 Download the example, e.g. >git clone git@github.com:henrikengstrom/Akka2Remote.git
 This will download it into a folder called "Akka2Remote" and you should "cd" into that folder next.
 
-*RUNNING CASE 1 : Lookup of remote actors*
+h2. RUNNING CASE 1 : Lookup of remote actors
 The next step is to run SBT:
 
 $ sbt
@@ -75,7 +75,7 @@ Sub result: 14 - 86 = -72
 Add result: 77 + 58 = 135
 and so on...
 
-*RUNNING CASE 2: Creation of actors on a remote node*
+h2. RUNNING CASE 2: Creation of actors on a remote node
 
 Make sure that the "CalculatorApplication" is running (see the first part of RUNNING CASE 1 above).
 
