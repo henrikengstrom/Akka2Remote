@@ -15,9 +15,9 @@ class SimpleCalculatorActor extends Actor {
   }
 }
 
-class CalculatorService extends Bootable {
-  // Load the "service" part of the application.conf file to configure this ActorSystem
-  val system = ActorSystem("CalculatorService", ConfigFactory.load.getConfig("service"))
+class CalculatorApplication extends Bootable {
+  // Load the "calculator" part of the application.conf file to configure this ActorSystem
+  val system = ActorSystem("CalculatorApplication", ConfigFactory.load.getConfig("calculator"))
   val actor = system.actorOf(Props[SimpleCalculatorActor], "simpleCalculator")
 
   def startup() {
@@ -28,9 +28,9 @@ class CalculatorService extends Bootable {
   }
 }
 
-object CalcSrv {
+object CalcApp {
   def main(args: Array[String]) {
-    new CalculatorService
-    println("Started Calculator Service - waiting for messages")
+    new CalculatorApplication
+    println("Started Calculator Application - waiting for messages")
   }
 }

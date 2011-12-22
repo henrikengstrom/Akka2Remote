@@ -1,17 +1,19 @@
 package org.h3nk3.akka.remote
 
 import akka.kernel.Bootable
-import akka.actor.{Props, Actor, ActorSystem}
 import com.typesafe.config.ConfigFactory
 import scala.util.Random
+import akka.actor.{ActorRef, Props, Actor, ActorSystem}
 
 class LookupApplication extends Bootable {
   // Load the "remotelookup" part of the application.conf file to configure this ActorSystem
   val system = ActorSystem("LookupApplication", ConfigFactory.load.getConfig("remotelookup"))
   val actor = system.actorOf(Props[LookupActor], "lookupActor")
+  // In a real application you probably want the address below parsed from a config file
+  val remoteActor = system.actorFor("akka://CalculatorApplication@127.0.0.1:2552/user/simpleCalculator")
 
   def doSomething(op: MathOp) = {
-    actor ! op
+    actor ! Tuple2(remoteActor, op)
   }
 
   def startup() {
@@ -23,12 +25,12 @@ class LookupApplication extends Bootable {
 }
 
 /**
- * This actor looks up a remote actor and sends it a message.
+ * This actor uses the remote actor and sends it a message.
  * The actor also handles results sent back from that remote actor.
  */
 class LookupActor extends Actor {
   def receive = {
-    case op: MathOp => context.system.actorFor("akka://CalculatorService@127.0.0.1:2553/user/simpleCalculator") ! op
+    case (actor: ActorRef, op: MathOp) => actor ! op
     case result: MathResult => result match {
       case AddResult(n1, n2, r) => println("Add result: %d + %d = %d".format(n1, n2, r))
       case SubtractResult(n1, n2, r) => println("Sub result: %d - %d = %d".format(n1, n2, r))
