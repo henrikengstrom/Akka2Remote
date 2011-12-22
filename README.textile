@@ -57,6 +57,7 @@ $ sbt
 > run
 
 Multiple main classes detected, select one to run:
+
  1] org.h3nk3.akka.remote.CalcApp
  2] org.h3nk3.akka.remote.LookupApp
  3] org.h3nk3.akka.remote.CreationApp
