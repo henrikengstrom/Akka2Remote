@@ -35,9 +35,9 @@ $ sbt
 
 Multiple main classes detected, select one to run:
 
- [1] org.h3nk3.akka.remote.CalcApp
- [2] org.h3nk3.akka.remote.LookupApp
- [3] org.h3nk3.akka.remote.CreationApp
+ 1] org.h3nk3.akka.remote.CalcApp
+ 2] org.h3nk3.akka.remote.LookupApp
+ 3] org.h3nk3.akka.remote.CreationApp
 
 Enter number:
 
@@ -49,7 +49,7 @@ You should see something like this:
 Started Calculator Application - waiting for messages
 
 Okay, next we need a new SBT instance to run the lookup application, so start a new terminal window and type
-<code>
+
 $ sbt
 [info] Loading global plugins from /Users/usr/.sbt/plugins
 [info] Loading project definition from /Users/usr/code/Akka2Remote/project
@@ -57,30 +57,29 @@ $ sbt
 > run
 
 Multiple main classes detected, select one to run:
- [1] org.h3nk3.akka.remote.CalcApp
- [2] org.h3nk3.akka.remote.LookupApp
- [3] org.h3nk3.akka.remote.CreationApp
+ 1] org.h3nk3.akka.remote.CalcApp
+ 2] org.h3nk3.akka.remote.LookupApp
+ 3] org.h3nk3.akka.remote.CreationApp
 
 Enter number:
-<code>
 
 This time you should select the "LookupApp" which in this case is number 2.
 When this is done you should see something similar to this:
-.. code-block::
-    [info] Running org.h3nk3.akka.remote.LookupApp
-    [INFO] [12/22/2011 11:55:21.622] [run-main] [Remote] Starting remote server on [akka://LookupApplication@127.0.0.1:2553]
-    Started Lookup Application
-    Sub result: 43 - 94 = -51
-    Sub result: 14 - 86 = -72
-    Add result: 77 + 58 = 135
-    and so on...
+
+[info] Running org.h3nk3.akka.remote.LookupApp
+[INFO] [12/22/2011 11:55:21.622] [run-main] [Remote] Starting remote server on [akka://LookupApplication@127.0.0.1:2553]
+Started Lookup Application
+Sub result: 43 - 94 = -51
+Sub result: 14 - 86 = -72
+Add result: 77 + 58 = 135
+and so on...
 
 h2. RUNNING CASE 2: Creation of actors on a remote node
 
 Make sure that the "CalculatorApplication" is running (see the first part of RUNNING CASE 1 above).
 
 Start a new terminal window and type:
-<code>
+
 $ sbt
 [info] Loading global plugins from /Users/usr/.sbt/plugins
 [info] Loading project definition from /Users/usr/code/Akka2Remote/project
@@ -89,16 +88,15 @@ $ sbt
 
 Multiple main classes detected, select one to run:
 
- [1] org.h3nk3.akka.remote.CalcApp
- [2] org.h3nk3.akka.remote.LookupApp
- [3] org.h3nk3.akka.remote.CreationApp
+ 1] org.h3nk3.akka.remote.CalcApp
+ 2] org.h3nk3.akka.remote.LookupApp
+ 3] org.h3nk3.akka.remote.CreationApp
 
 Enter number:
-<code>
 
 Select "CreationApp" which in this case is number 3.
 Now you should see something like this:
-<code>
+
 [info] Running org.h3nk3.akka.remote.CreationApp
 [INFO] [12/22/2011 11:57:08.899] [run-main] [Remote] Starting remote server on [akka://RemoteCreation@127.0.0.1:2554]
 Started Creation Application
@@ -107,7 +105,6 @@ Div result: 7573 / 24 = 315.00
 Mul result: 6 * 15 = 90
 Mul result: 5 * 0 = 0
 and so on...
-<code>
 
 If you switch between the terminal windows you will see that the all 3 actor systems are running at once.
 The example applications run forever, or at least until the power sources of the earth are exhausted,
