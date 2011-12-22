@@ -1,1 +1,98 @@
-Example application for how to use Akka 2.0 remoting.
+Example application for how to use Akka 2.0-M1 remoting.
+
+The example contains 3 services:
+* CalculatorService (CS): number cruncher service that waits for messages, acts upon them and sends back the results
+* LookupService         : looks up an existing actor on the CS and sends messages to it
+* CreationService       : deploys a new actor on CS and sends messages to this new actor on the remote CS node
+
+All services run in their own ActorSystem and although they all run on the same physical machine (127.0.0.1) in this
+example it is really easy to change this to also have it run on different machines.
+
+To run this example you have to have SBT installed. Once this is fulfilled you just do the following.
+Download the example, e.g. >git clone git@github.com:henrikengstrom/Akka2Remote.git
+This will download it into a folder called "Akka2Remote" and you should "cd" into that folder next.
+The next step is to run SBT:
+
+$ sbt
+[info] Loading global plugins from /Users/usr/.sbt/plugins
+[info] Loading project definition from /Users/usr/code/Akka2Remote/project
+[info] Set current project to akka2remote (in build file:/Users/usr/code/Akka2Remote/)
+> run
+
+Multiple main classes detected, select one to run:
+
+ [1] org.h3nk3.akka.remote.CalcSrv
+ [2] org.h3nk3.akka.remote.LookupApp
+ [3] org.h3nk3.akka.remote.CreationApp
+
+Enter number:
+
+Start of by running the calculator service, i.e. "1". This will start the service and wait for messages.
+You should see something like this:
+
+[info] Running org.h3nk3.akka.remote.CalcSrv
+[INFO] [12/22/2011 11:53:14.907] [run-main] [Remote] Starting remote server on [akka://CalculatorService@127.0.0.1:2553]
+Started Calculator Service - waiting for messages
+
+Okay, next we need a new SBT instance to run the lookup application, so start a new terminal window and type
+
+$ sbt
+[info] Loading global plugins from /Users/usr/.sbt/plugins
+[info] Loading project definition from /Users/usr/code/Akka2Remote/project
+[info] Set current project to akka2remote (in build file:/Users/usr/code/Akka2Remote/)
+> run
+
+Multiple main classes detected, select one to run:
+
+ [1] org.h3nk3.akka.remote.CalcSrv
+ [2] org.h3nk3.akka.remote.LookupApp
+ [3] org.h3nk3.akka.remote.CreationApp
+
+Enter number:
+
+This time you should select the "LookupApp" which in this case is number 2.
+When this is done you should see something similar to this:
+
+[info] Running org.h3nk3.akka.remote.LookupApp
+[INFO] [12/22/2011 11:55:21.622] [run-main] [Remote] Starting remote server on [akka://LookupApplication@127.0.0.1:2552]
+Started Lookup Application
+Sub result: 43 - 94 = -51
+Sub result: 14 - 86 = -72
+Add result: 77 + 58 = 135
+and so on...
+
+If you want to you can also run the creation application at the same time.
+Start a new terminal window and type:
+$ sbt
+[info] Loading global plugins from /Users/usr/.sbt/plugins
+[info] Loading project definition from /Users/usr/code/Akka2Remote/project
+[info] Set current project to akka2remote (in build file:/Users/usr/code/Akka2Remote/)
+> run
+
+Multiple main classes detected, select one to run:
+
+ [1] org.h3nk3.akka.remote.CalcSrv
+ [2] org.h3nk3.akka.remote.LookupApp
+ [3] org.h3nk3.akka.remote.CreationApp
+
+Enter number:
+
+Select "CreationApp" which in this case is number 3.
+Now you should see something like this:
+
+[info] Running org.h3nk3.akka.remote.CreationApp
+[INFO] [12/22/2011 11:57:08.899] [run-main] [Remote] Starting remote server on [akka://RemoteCreation@127.0.0.1:2554]
+Started Creation Application
+Div result: 9158 / 50 = 183.00
+Div result: 7573 / 24 = 315.00
+Mul result: 6 * 15 = 90
+Mul result: 5 * 0 = 0
+and so on...
+
+If you switch between the terminal windows you will see that the all run in parallel, 2 "applications" and one service.
+The examples run forever, or at least until the power sources of the earth are exhausted, so you should probably just
+stop them from running that long with a CTRL-C.
+
+Good luck with the hAKKing!
+
+

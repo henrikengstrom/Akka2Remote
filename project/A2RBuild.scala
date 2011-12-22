@@ -1,7 +1,7 @@
 import sbt._
 import Keys._
 
-object TypesafeDemoBuild extends Build {
+object A2RDemo extends Build {
   val Organization = "org.h3nk3"
   val Version      = "1.0-SNAPSHOT"
   val ScalaVersion = "2.9.1"
@@ -33,7 +33,7 @@ object Dependencies {
 
 object Dependency {
   object V {
-    val Akka      = "2.0-SNAPSHOT"
+    val Akka      = "2.0-M1"
   }
 
   val akkaKernel        = "com.typesafe.akka" % "akka-kernel"        % V.Akka
