@@ -66,15 +66,14 @@ Enter number:
 
 This time you should select the "LookupApp" which in this case is number 2.
 When this is done you should see something similar to this:
-<code>
-[info] Running org.h3nk3.akka.remote.LookupApp
-[INFO] [12/22/2011 11:55:21.622] [run-main] [Remote] Starting remote server on [akka://LookupApplication@127.0.0.1:2553]
-Started Lookup Application
-Sub result: 43 - 94 = -51
-Sub result: 14 - 86 = -72
-Add result: 77 + 58 = 135
-and so on...
-<code>
+.. code-block::
+    [info] Running org.h3nk3.akka.remote.LookupApp
+    [INFO] [12/22/2011 11:55:21.622] [run-main] [Remote] Starting remote server on [akka://LookupApplication@127.0.0.1:2553]
+    Started Lookup Application
+    Sub result: 43 - 94 = -51
+    Sub result: 14 - 86 = -72
+    Add result: 77 + 58 = 135
+    and so on...
 
 h2. RUNNING CASE 2: Creation of actors on a remote node
 
